@@ -9,7 +9,7 @@ MazeCraze is a maze solving game that doubles as an algorithm visualization tool
 With MazeCraze, users will be able to:
 
 - [ ] Generate a random maze
-- [ ] Select squares to attempt to solve the maze
+- [ ] Click squares to attempt to solve the maze
 - [ ] Click "Breadth-First Search Solution" or "Depth-First Search Solution" to visualize how the maze is solved using these algorithms
 
 In addition, this project will include:
