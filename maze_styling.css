@@ -1,0 +1,57 @@
+body {
+  background: rgba(255, 246, 209, 0.75);
+}
+
+h1 {
+  font-family: 'Oswald';
+}
+
+label,
+button {
+  font-family: 'Open Sans';
+  padding-right: 5px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  width: 1em;
+  height: 1em;
+  border: 2px solid;
+  cursor: pointer;
+}
+
+td.s {
+  border-bottom: none;
+}
+
+td.n {
+  border-top: none;
+}
+
+td.w {
+  border-left: none;
+}
+
+td.e {
+  border-right: none;
+}
+
+td.v {
+  background: skyblue;
+}
+
+td.mid {
+  background-color: pink;
+  /*transition: background-color linear 1s;*/
+}
+
+#start {
+  background: green;
+}
+
+#end {
+  background: red;
+}
