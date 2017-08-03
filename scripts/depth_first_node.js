@@ -1,6 +1,6 @@
 class depthFirstNode {
   constructor(pos, parent) {
-    this.nodesVisited = 0;
+    this.nodesVisited = [];
     this.pos = pos;
     this.row = pos[0];
     this.col = pos[1];

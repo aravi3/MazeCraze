@@ -21,7 +21,7 @@ const depthFirstSolve = function(node, visitedNodes = []) {
   let result;
 
   if (arraysEqual(node.pos, endPos())) {
-    node.nodesVisited = visitedNodes.length;
+    node.nodesVisited = visitedNodes;
     return node;
   }
 
@@ -47,7 +47,7 @@ const depthFirstSolve = function(node, visitedNodes = []) {
 
     visitedNodes.push(neighbors[i]);
 
-    tblArray[neighborRow][neighborCol].addClass('mid');
+    // tblArray[neighborRow][neighborCol].addClass('mid');
 
     result = depthFirstSolve(neighbors[i], visitedNodes);
 
@@ -67,27 +67,49 @@ const renderSolution = function() {
   let tblArray = convertToArray();
   let totalNodes = tblArray.length * tblArray[0].length;
   let duration = (t1 - t0)/1000;
-  let nodesVisited = square.nodesVisited;
+  let nodesVisited = square.nodesVisited.length;
   let efficiency = ((totalNodes - nodesVisited) / totalNodes) * 100;
-  $('.time-value').text(`${duration.toFixed(2)} s`);
-  $('.visited-value').text(nodesVisited);
-  $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
 
-  let solution = [];
+  let finishedMarkingVisited = false;
+  let timerId;
+  let neighborRow, neighborCol;
+  let i = 0;
 
-  while (square.parent) {
-    square = square.parent;
+  timerId = setInterval(() => {
+    neighborRow = square.nodesVisited[i].pos[0];
+    neighborCol = square.nodesVisited[i].pos[1];
+    tblArray[neighborRow][neighborCol].addClass('mid');
 
-    if (arraysEqual(square.pos, startPos())) {
-      break;
+    i++;
+
+    if (i === square.nodesVisited.length) {
+      finishedMarkingVisited = true;
     }
 
-    solution.unshift(square);
-  }
+    if (finishedMarkingVisited) {
+      $('.time-value').text(`${duration.toFixed(2)} s`);
+      $('.visited-value').text(nodesVisited);
+      $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
 
-  solution.forEach(cell => {
-    tblArray[cell.row][cell.col].removeClass('mid');
-    tblArray[cell.row][cell.col].addClass('v');
+      let solution = [];
+
+      while (square.parent) {
+        square = square.parent;
+
+        if (arraysEqual(square.pos, startPos())) {
+          break;
+        }
+
+        solution.unshift(square);
+      }
+
+      solution.forEach(cell => {
+        tblArray[cell.row][cell.col].removeClass('mid');
+        tblArray[cell.row][cell.col].addClass('v');
+      });
+
+      clearInterval(timerId);
+    }
   });
 };
 

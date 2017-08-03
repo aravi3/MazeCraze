@@ -441,7 +441,6 @@ const makeMaze = function(rows, cols) {
 	}
 
 	walk(tbl.kid(irand(h) + 1).kid(irand(w) + 1));
-	// gid('solve').style.display='inline';
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = makeMaze;
 
@@ -479,44 +478,6 @@ function walk(c) {
 		walk(x);
 	}
 }
-
-// export const solve = function(c, t) {
-// 	c = gid('start');
-// 	t = gid('end');
-//
-// 	if (c === undefined) {
-// 		c = gid('maze').kid(1).kid(1);
-// 		c.cls('v');
-// 	}
-//
-// 	if (t === undefined) {
-// 		t = gid('maze').kid(24).kid(39);
-// 	}
-//
-// 	if (c === t) {
-// 		return 1;
-// 	}
-//
-// 	c.vis = 1;
-//
-// 	for (let i = 0; i < 4; i++) {
-// 		let x = c.neighbors[i];
-//
-// 		if (x.tagName.toLowerCase() == 'th') {
-// 			continue;
-// 		}
-//
-// 		if (x.vis || !c.className.match(dirs[i] || !solve(x, t))) {
-// 			continue;
-// 		}
-//
-// 		x.cls('v');
-// 		return 1;
-// 	}
-//
-// 	c.vis = null;
-// 	return 0;
-// };
 
 
 /***/ }),
@@ -649,7 +610,7 @@ const depthFirstSolve = function(node, visitedNodes = []) {
   let result;
 
   if (Object(__WEBPACK_IMPORTED_MODULE_1__modules__["a" /* arraysEqual */])(node.pos, Object(__WEBPACK_IMPORTED_MODULE_1__modules__["e" /* endPos */])())) {
-    node.nodesVisited = visitedNodes.length;
+    node.nodesVisited = visitedNodes;
     return node;
   }
 
@@ -675,7 +636,7 @@ const depthFirstSolve = function(node, visitedNodes = []) {
 
     visitedNodes.push(neighbors[i]);
 
-    tblArray[neighborRow][neighborCol].addClass('mid');
+    // tblArray[neighborRow][neighborCol].addClass('mid');
 
     result = depthFirstSolve(neighbors[i], visitedNodes);
 
@@ -695,27 +656,49 @@ const renderSolution = function() {
   let tblArray = Object(__WEBPACK_IMPORTED_MODULE_1__modules__["c" /* convertToArray */])();
   let totalNodes = tblArray.length * tblArray[0].length;
   let duration = (t1 - t0)/1000;
-  let nodesVisited = square.nodesVisited;
+  let nodesVisited = square.nodesVisited.length;
   let efficiency = ((totalNodes - nodesVisited) / totalNodes) * 100;
-  $('.time-value').text(`${duration.toFixed(2)} s`);
-  $('.visited-value').text(nodesVisited);
-  $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
 
-  let solution = [];
+  let finishedMarkingVisited = false;
+  let timerId;
+  let neighborRow, neighborCol;
+  let i = 0;
 
-  while (square.parent) {
-    square = square.parent;
+  timerId = setInterval(() => {
+    neighborRow = square.nodesVisited[i].pos[0];
+    neighborCol = square.nodesVisited[i].pos[1];
+    tblArray[neighborRow][neighborCol].addClass('mid');
 
-    if (Object(__WEBPACK_IMPORTED_MODULE_1__modules__["a" /* arraysEqual */])(square.pos, Object(__WEBPACK_IMPORTED_MODULE_1__modules__["l" /* startPos */])())) {
-      break;
+    i++;
+
+    if (i === square.nodesVisited.length) {
+      finishedMarkingVisited = true;
     }
 
-    solution.unshift(square);
-  }
+    if (finishedMarkingVisited) {
+      $('.time-value').text(`${duration.toFixed(2)} s`);
+      $('.visited-value').text(nodesVisited);
+      $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
 
-  solution.forEach(cell => {
-    tblArray[cell.row][cell.col].removeClass('mid');
-    tblArray[cell.row][cell.col].addClass('v');
+      let solution = [];
+
+      while (square.parent) {
+        square = square.parent;
+
+        if (Object(__WEBPACK_IMPORTED_MODULE_1__modules__["a" /* arraysEqual */])(square.pos, Object(__WEBPACK_IMPORTED_MODULE_1__modules__["l" /* startPos */])())) {
+          break;
+        }
+
+        solution.unshift(square);
+      }
+
+      solution.forEach(cell => {
+        tblArray[cell.row][cell.col].removeClass('mid');
+        tblArray[cell.row][cell.col].addClass('v');
+      });
+
+      clearInterval(timerId);
+    }
   });
 };
 
@@ -729,7 +712,7 @@ const renderSolution = function() {
 "use strict";
 class depthFirstNode {
   constructor(pos, parent) {
-    this.nodesVisited = 0;
+    this.nodesVisited = [];
     this.pos = pos;
     this.row = pos[0];
     this.col = pos[1];

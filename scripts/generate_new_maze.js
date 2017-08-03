@@ -71,7 +71,6 @@ export const makeMaze = function(rows, cols) {
 	}
 
 	walk(tbl.kid(irand(h) + 1).kid(irand(w) + 1));
-	// gid('solve').style.display='inline';
 };
 
 function shuffle(x) {
@@ -107,41 +106,3 @@ function walk(c) {
 		walk(x);
 	}
 }
-
-// export const solve = function(c, t) {
-// 	c = gid('start');
-// 	t = gid('end');
-//
-// 	if (c === undefined) {
-// 		c = gid('maze').kid(1).kid(1);
-// 		c.cls('v');
-// 	}
-//
-// 	if (t === undefined) {
-// 		t = gid('maze').kid(24).kid(39);
-// 	}
-//
-// 	if (c === t) {
-// 		return 1;
-// 	}
-//
-// 	c.vis = 1;
-//
-// 	for (let i = 0; i < 4; i++) {
-// 		let x = c.neighbors[i];
-//
-// 		if (x.tagName.toLowerCase() == 'th') {
-// 			continue;
-// 		}
-//
-// 		if (x.vis || !c.className.match(dirs[i] || !solve(x, t))) {
-// 			continue;
-// 		}
-//
-// 		x.cls('v');
-// 		return 1;
-// 	}
-//
-// 	c.vis = null;
-// 	return 0;
-// };
