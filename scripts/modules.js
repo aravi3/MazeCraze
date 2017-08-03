@@ -79,8 +79,9 @@ export const arraysEqual = function(arr1, arr2) {
   }
 
   for (let i = 0; i < arr1.length; i++) {
-      if(arr1[i] !== arr2[i])
-          return false;
+    if(arr1[i] !== arr2[i]) {
+      return false;
+    }
   }
 
   return true;
@@ -90,6 +91,33 @@ export const includedIn = function(childArr, parentArr) {
   for (let i = 0; i < parentArr.length; i++) {
     if (arraysEqual(childArr, parentArr[i])) {
       return true;
+    }
+  }
+
+  return false;
+};
+
+export const calculateHValue = function(pos) {
+  let hValue = Math.abs(endPos()[1] - pos[1]) + Math.abs(endPos()[0] - pos[0]);
+  return hValue;
+};
+
+export const removeNode = function(node, list) {
+  for (let i = 0; i < list.length; i++) {
+    if (arraysEqual(list[i].pos, node.pos)) {
+      if (i > -1) {
+        list.splice(i, 1);
+      }
+    }
+  }
+};
+
+export const findNode = function(node, list) {
+  for (let i = 0; i < list.length; i++) {
+    if (arraysEqual(list[i].pos, node.pos)) {
+      if (i > -1) {
+        return true;
+      }
     }
   }
 

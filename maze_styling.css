@@ -1,15 +1,39 @@
 body {
-  background: rgba(255, 246, 209, 0.75);
+  /*background: rgba(255, 246, 209, 0.75);*/
+  background-color: #fafafa;
 }
 
 h1 {
   font-family: 'Oswald';
+  font-size: 30px;
 }
 
-label,
+h2 {
+  font-family: 'Open Sans';
+  font-size: 17px;
+}
+
+label {
+  padding-right: 5px;
+  font-family: 'Open Sans';
+  font-size: 16px;
+}
+
 button {
   font-family: 'Open Sans';
-  padding-right: 5px;
+  background: black;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+button:hover {
+  background-color: #D3D3D3;
+  color: black;
 }
 
 table {
@@ -40,18 +64,80 @@ td.e {
 }
 
 td.v {
-  background: skyblue;
+  background-color: #2636FF;
 }
 
 td.mid {
-  background-color: pink;
+  background-color: #9acfff;
   /*transition: background-color linear 1s;*/
 }
 
 #start {
-  background: green;
+  background-color: #4ab229;
 }
 
 #end {
-  background: red;
+  background-color: #FF453A;
+}
+
+.menu {
+  position: relative;
+  font-family: 'Open Sans';
+  min-width: 1140px;
+}
+
+.time {
+  font-size: 25px;
+  position: absolute;
+  top: 19px;
+  right: 570px;
+}
+
+.time-header {
+  text-decoration: underline;
+}
+
+.time-value {
+  font-size: 20px;
+}
+
+.visited {
+  font-size: 25px;
+  position: absolute;
+  top: 19px;
+  right: 336px;
+}
+
+.visited-header {
+  text-decoration: underline;
+}
+
+.visited-value {
+  font-size: 20px;
+}
+
+.efficiency {
+  font-size: 25px;
+  position: absolute;
+  top: 19px;
+  right: 160px;
+}
+
+.efficiency-header {
+  text-decoration: underline;
+}
+
+.efficiency-value {
+  font-size: 20px;
+}
+
+.efficiency-desc {
+  font-size: 15px;
+  position: absolute;
+  top: 30px;
+  right: 25px;
+}
+
+.numerator {
+  border-bottom: 1px solid black;
 }

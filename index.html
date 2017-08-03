@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>MazeCraze</title>
+    <link rel="stylesheet" href="./reset.css" type="text/css" />
     <link rel="stylesheet" href="./maze_styling.css" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -14,14 +15,57 @@
     </center>
 
     <form>
-      <fieldset>
-        <label>Rows</label><input id='rows' size="3"/>
-        <label>Colums</label><input id='cols' size="3"/>
-        <button id='generate'>Generate</button>
-        <button id='solve'>Solve</button>
-        <button id='clear'>Clear</button>
+      <fieldset class='menu'>
+          <label>Rows</label><input id='rows' size="3"/>
+          <label>Colums</label><input id='cols' size="3"/>
+          <button id='generate'>Generate</button>
+          <button id='clear'>Clear</button>
+
+          <div class='time'>
+            <span class='time-header'>Time</span>
+            <br />
+            <center>
+              <span class='time-value'></span>
+            </center>
+          </div>
+
+          <div class='visited'>
+            <span class='visited-header'>Visited Nodes</span>
+            <br />
+            <center>
+              <span class='visited-value'></span>
+            </center>
+          </div>
+
+          <div class='efficiency'>
+            <span class='efficiency-header'>Efficiency</span>
+            <br />
+            <center>
+              <span class='efficiency-value'></span>
+            </center>
+          </div>
+
+          <div class='efficiency-desc'>
+            <span>*</span>
+            <span class='numerator'>(Total - Visited)</span>
+            <br />
+            <center>
+              <span class='denominator'>Total</span>
+            </center>
+          </div>
+
+          <br /><br />
+
+          <button id='breadth'>Breadth-First Solution</button>
+          <button id='astar'>A* Solution</button>
+          <button id='depth'>Depth-First Solution</button>
       </fieldset>
     </form>
+
+    <center>
+      <h2>Click cells to select endpoints</h2>
+    </center>
+
     <table id='maze'/>
   </body>
 </html>

@@ -1,4 +1,4 @@
-import TreeNode from './tree_node';
+import TreeNode from './breadth_first_node';
 import {
   convertToArray,
   startPos,
@@ -14,21 +14,23 @@ import {
 
 const breadthFirstSolve = function() {
   let tblArray = convertToArray();
-  let square;
+  let totalNodes = tblArray.length * tblArray[0].length;
+  let timerId;
+  let duration, t1, t0;
   let neighborRow, neighborCol;
   let topNode, neighbors, up, right, down, left;
+  let nodesVisited, efficiency;
   let nodeQueue = [];
   let visitedNodes = [];
   let trail = [];
-  let solution = [];
 
   trail.push(new TreeNode(startPos(), undefined));
   nodeQueue.push(new TreeNode(startPos(), undefined));
-  visitedNodes.push(startPos);
+  visitedNodes.push(startPos());
 
-  let endFound = false;
+  t0 = performance.now();
 
-  while (nodeQueue.length !== 0 && !endFound) {
+  timerId = setInterval(() => {
     topNode = nodeQueue.shift();
     neighbors = [];
     up = upPos(topNode.pos);
@@ -54,12 +56,25 @@ const breadthFirstSolve = function() {
         tblArray[neighborRow][neighborCol].addClass('mid');
 
         if (arraysEqual(neighbors[i], endPos())) {
-          endFound = true;
+          t1 = performance.now();
+          duration = (t1 - t0)/1000;
+          nodesVisited = visitedNodes.length;
+          efficiency = ((totalNodes - nodesVisited) / totalNodes) * 100;
+          $('.time-value').text(`${duration.toFixed(2)} s`);
+          $('.visited-value').text(nodesVisited);
+          $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
+          renderSolution(tblArray, trail);
+          clearInterval(timerId);
           break;
         }
       }
     }
-  }
+  }, 0);
+};
+
+const renderSolution = function(tblArray, trail) {
+  let square;
+  let solution = [];
 
   square = trail.slice(-1)[0];
 
