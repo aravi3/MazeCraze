@@ -44,6 +44,10 @@ $(() => {
   $('#breadth').on('click', (e) => {
     e.preventDefault();
 
+    $('#astar').css('text-decoration', 'none');
+    $('#depth').css('text-decoration', 'none');
+    $('#breadth').css('text-decoration', 'underline');
+
     $("table#maze tr").each(function() {
       let dataCell = $(this).find('td');
 
@@ -71,6 +75,10 @@ $(() => {
 
   $('#astar').on('click', (e) => {
     e.preventDefault();
+
+    $('#depth').css('text-decoration', 'none');
+    $('#breadth').css('text-decoration', 'none');
+    $('#astar').css('text-decoration', 'underline');
 
     $("table#maze tr").each(function() {
       let dataCell = $(this).find('td');
@@ -100,6 +108,10 @@ $(() => {
   $('#depth').on('click', (e) => {
     e.preventDefault();
 
+    $('#astar').css('text-decoration', 'none');
+    $('#breadth').css('text-decoration', 'none');
+    $('#depth').css('text-decoration', 'underline');
+
     $("table#maze tr").each(function() {
       let dataCell = $(this).find('td');
 
@@ -127,6 +139,11 @@ $(() => {
 
   $('#clear').on('click', (e) => {
     e.preventDefault();
+
+    $('#astar').css('text-decoration', 'none');
+    $('#breadth').css('text-decoration', 'none');
+    $('#depth').css('text-decoration', 'none');
+
     $('#start').removeAttr('id');
     $('#end').removeAttr('id');
 
