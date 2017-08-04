@@ -239,6 +239,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 $(() => {
+  window.scrollTo(0, 0);
+
+  $('.modal-button').on('click', (e) => {
+    e.preventDefault();
+    $('#splash').css('visibility', 'hidden');
+    $('#overlay').css('overflow-y', 'scroll');
+  });
+
+  $('.instructions-link').on('click', (e) => {
+    e.preventDefault();
+    $('#splash').css('visibility', 'visible');
+    $('#overlay').css('overflow-y', 'hidden');
+  });
+
   $('#generate').on('click', (e) => {
     e.preventDefault();
     Object(__WEBPACK_IMPORTED_MODULE_0__scripts_generate_new_maze__["a" /* makeMaze */])($('#rows').val(), $('#cols').val());

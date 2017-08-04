@@ -5,6 +5,20 @@ import depthFirstSolve from './scripts/depth_first';
 import aStarSolve from './scripts/a_star';
 
 $(() => {
+  window.scrollTo(0, 0);
+
+  $('.modal-button').on('click', (e) => {
+    e.preventDefault();
+    $('#splash').css('visibility', 'hidden');
+    $('#overlay').css('overflow-y', 'scroll');
+  });
+
+  $('.instructions-link').on('click', (e) => {
+    e.preventDefault();
+    $('#splash').css('visibility', 'visible');
+    $('#overlay').css('overflow-y', 'hidden');
+  });
+
   $('#generate').on('click', (e) => {
     e.preventDefault();
     makeMaze($('#rows').val(), $('#cols').val());

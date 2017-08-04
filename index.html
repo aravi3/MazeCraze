@@ -9,19 +9,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="application/javascript" src="bundle.js"></script>
   </head>
-  <body>
+  <body id='overlay'>
+
+    <div id='splash'>
+      <div class='instructions'>
+        <center>
+          <h2 class='instructions-header'>How To MazeCraze</h2>
+        </center>
+        <br />
+        <p class='instructions-step'>1. Enter maze dimensions and click "Generate" to generate random maze (default is 20 x 20)</p>
+        <p class='instructions-step'>2. Click on maze to select starting point and ending point</p>
+        <p class='instructions-step'>3. Select tree traversal method to begin visualizing!</p>
+        <br />
+        <center>
+          <button class='modal-button'>Start</button>
+        </center>
+      </div>
+    </div>
+
     <center>
       <h1>MazeCraze</h1>
     </center>
 
     <form>
       <fieldset class='menu'>
+          &nbsp;
           <label>Rows</label><input id='rows' size="3"/>
           &nbsp;
           <label class='cols-label'>Colums</label><input id='cols' size="3"/>
           &nbsp;
-          <button id='generate'>Generate</button>
-          <button id='clear'>Clear</button>
+          <button id='generate' class='menu-button'>Generate</button>
+          <button id='clear' class='menu-button'>Clear</button>
 
           <div class='time'>
             <span class='time-header'>Time</span>
@@ -58,14 +76,14 @@
 
           <br /><br />
 
-          <button id='breadth'>Breadth-First Solution</button>
-          <button id='astar'>A* Solution</button>
-          <button id='depth'>Depth-First Solution</button>
+          <button id='breadth' class='menu-button'>Breadth-First Solution</button>
+          <button id='astar' class='menu-button'>A* Solution</button>
+          <button id='depth' class='menu-button'>Depth-First Solution</button>
       </fieldset>
     </form>
 
     <center>
-      <h2>Click cells to select endpoints</h2>
+      <p class='instructions-link'>Instructions</p>
     </center>
 
     <center>

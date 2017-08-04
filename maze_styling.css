@@ -19,7 +19,12 @@ label {
   font-size: 16px;
 }
 
-button {
+input {
+  font-family: 'Open Sans';
+  font-size: 16px;
+}
+
+button.menu-button {
   font-family: 'Open Sans';
   background: black;
   color: white;
@@ -31,9 +36,24 @@ button {
   margin-right: 5px;
 }
 
-button:hover {
+button.menu-button:hover {
   background-color: #D3D3D3;
   color: black;
+}
+
+button.modal-button {
+  font-family: 'Open Sans';
+  font-size: 20px;
+  background: white;
+  color: black;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+button.modal-button:hover {
+  background-color: black;
+  color: white;
 }
 
 table {
@@ -140,4 +160,49 @@ td.mid {
 
 .numerator {
   border-bottom: 1px solid black;
+}
+
+#splash {
+  font-family: 'Open Sans';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(250, 250, 250, 0.9);
+  color: black;
+  z-index: 999;
+}
+
+#overlay {
+  overflow-y: hidden;
+}
+
+.instructions {
+  position: relative;
+  top: -10%;
+}
+
+.instructions-header {
+  font-family: 'Oswald';
+  font-size: 30px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid black;
+}
+
+.instructions-step {
+  font-size: 20px;
+}
+
+.instructions-link {
+  font-family: 'Open Sans';
+  font-size: 14px;
+}
+
+.instructions-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
