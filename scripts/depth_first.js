@@ -58,6 +58,7 @@ const depthFirstSolve = function(node, visitedNodes = []) {
 };
 
 const renderSolution = function() {
+  let efficiency;
   let t0 = performance.now();
   let square = depthFirstSolve(new TreeNode(startPos(), undefined));
   let t1 = performance.now();
@@ -66,7 +67,6 @@ const renderSolution = function() {
   let totalNodes = tblArray.length * tblArray[0].length;
   let duration = (t1 - t0)/1000;
   let nodesVisited = square.nodesVisited.length;
-  let efficiency = ((totalNodes - nodesVisited) / totalNodes) * 100;
 
   let finishedMarkingVisited = false;
   let timerId;
@@ -95,7 +95,6 @@ const renderSolution = function() {
     if (finishedMarkingVisited) {
       $('.time-value').text(`${duration.toFixed(2)} s`);
       $('.visited-value').text(nodesVisited);
-      $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
 
       let solution = [];
 
@@ -114,6 +113,9 @@ const renderSolution = function() {
         tblArray[cell.row][cell.col].removeClass('mid');
         tblArray[cell.row][cell.col].addClass('v');
       });
+
+      efficiency = ((totalNodes - (nodesVisited - solution.length)) / totalNodes) * 100;
+      $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
 
       clearInterval(timerId);
 

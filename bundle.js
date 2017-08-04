@@ -534,7 +534,6 @@ function walk(c) {
 
 const breadthFirstSolve = function() {
   let tblArray = Object(__WEBPACK_IMPORTED_MODULE_1__modules__["c" /* convertToArray */])();
-  let totalNodes = tblArray.length * tblArray[0].length;
   let timerId;
   let duration, t1, t0;
   let neighborRow, neighborCol, interimRow, interimCol;
@@ -586,11 +585,10 @@ const breadthFirstSolve = function() {
           t1 = performance.now();
           duration = (t1 - t0)/1000;
           nodesVisited = visitedNodes.length;
-          efficiency = ((totalNodes - nodesVisited) / totalNodes) * 100;
+          // efficiency = ((totalNodes - nodesVisited) / totalNodes) * 100;
           $('.time-value').text(`${duration.toFixed(2)} s`);
           $('.visited-value').text(nodesVisited);
-          $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
-          renderSolution(tblArray, trail);
+          renderSolution(tblArray, trail, nodesVisited);
           clearInterval(timerId);
           break;
         }
@@ -599,7 +597,9 @@ const breadthFirstSolve = function() {
   }, 0);
 };
 
-const renderSolution = function(tblArray, trail) {
+const renderSolution = function(tblArray, trail, nodesVisited) {
+  let efficiency;
+  let totalNodes = tblArray.length * tblArray[0].length;
   let square;
   let solution = [];
 
@@ -620,6 +620,10 @@ const renderSolution = function(tblArray, trail) {
     tblArray[cell.row][cell.col].removeClass('mid');
     tblArray[cell.row][cell.col].addClass('v');
   });
+
+  efficiency = ((totalNodes - (nodesVisited - solution.length)) / totalNodes) * 100;
+
+  $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
 
   $("table#maze tr").each(function() {
     let dataCell = $(this).find('td');
@@ -707,6 +711,7 @@ const depthFirstSolve = function(node, visitedNodes = []) {
 };
 
 const renderSolution = function() {
+  let efficiency;
   let t0 = performance.now();
   let square = depthFirstSolve(new __WEBPACK_IMPORTED_MODULE_0__depth_first_node__["a" /* default */](Object(__WEBPACK_IMPORTED_MODULE_1__modules__["l" /* startPos */])(), undefined));
   let t1 = performance.now();
@@ -715,7 +720,6 @@ const renderSolution = function() {
   let totalNodes = tblArray.length * tblArray[0].length;
   let duration = (t1 - t0)/1000;
   let nodesVisited = square.nodesVisited.length;
-  let efficiency = ((totalNodes - nodesVisited) / totalNodes) * 100;
 
   let finishedMarkingVisited = false;
   let timerId;
@@ -744,7 +748,6 @@ const renderSolution = function() {
     if (finishedMarkingVisited) {
       $('.time-value').text(`${duration.toFixed(2)} s`);
       $('.visited-value').text(nodesVisited);
-      $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
 
       let solution = [];
 
@@ -763,6 +766,9 @@ const renderSolution = function() {
         tblArray[cell.row][cell.col].removeClass('mid');
         tblArray[cell.row][cell.col].addClass('v');
       });
+
+      efficiency = ((totalNodes - (nodesVisited - solution.length)) / totalNodes) * 100;
+      $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
 
       clearInterval(timerId);
 
@@ -812,12 +818,11 @@ class depthFirstNode {
 
 const aStarSolve = function() {
   let tblArray = Object(__WEBPACK_IMPORTED_MODULE_1__modules__["c" /* convertToArray */])();
-  let totalNodes = tblArray.length * tblArray[0].length;
   let timerId;
   let duration, t1, t0;
   let neighbors, neighborRow, neighborCol, interimRow, interimCol;
   let up, right, down, left;
-  let nodesVisited, efficiency;
+  let nodesVisited;
   let gScore, gScoreIsBest;
   let endFound = false;
   let currentNode;
@@ -843,11 +848,9 @@ const aStarSolve = function() {
       t1 = performance.now();
       duration = (t1 - t0)/1000;
       nodesVisited = closedList.length;
-      efficiency = ((totalNodes - nodesVisited) / totalNodes) * 100;
       $('.time-value').text(`${duration.toFixed(2)} s`);
       $('.visited-value').text(nodesVisited);
-      $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
-      renderSolution(tblArray, currentNode);
+      renderSolution(tblArray, currentNode, nodesVisited);
       clearInterval(timerId);
       endFound = true;
     }
@@ -908,7 +911,9 @@ const aStarSolve = function() {
   return undefined;
 };
 
-const renderSolution = function(tblArray, square) {
+const renderSolution = function(tblArray, square, nodesVisited) {
+  let efficiency;
+  let totalNodes = tblArray.length * tblArray[0].length;
   let solution = [];
 
   while (square.parent) {
@@ -926,6 +931,9 @@ const renderSolution = function(tblArray, square) {
     tblArray[cell.row][cell.col].removeClass('mid');
     tblArray[cell.row][cell.col].addClass('v');
   });
+
+  efficiency = ((totalNodes - (nodesVisited - solution.length)) / totalNodes) * 100;
+  $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
 
   $("table#maze tr").each(function() {
     let dataCell = $(this).find('td');

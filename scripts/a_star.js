@@ -17,12 +17,11 @@ import {
 
 const aStarSolve = function() {
   let tblArray = convertToArray();
-  let totalNodes = tblArray.length * tblArray[0].length;
   let timerId;
   let duration, t1, t0;
   let neighbors, neighborRow, neighborCol, interimRow, interimCol;
   let up, right, down, left;
-  let nodesVisited, efficiency;
+  let nodesVisited;
   let gScore, gScoreIsBest;
   let endFound = false;
   let currentNode;
@@ -48,11 +47,9 @@ const aStarSolve = function() {
       t1 = performance.now();
       duration = (t1 - t0)/1000;
       nodesVisited = closedList.length;
-      efficiency = ((totalNodes - nodesVisited) / totalNodes) * 100;
       $('.time-value').text(`${duration.toFixed(2)} s`);
       $('.visited-value').text(nodesVisited);
-      $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
-      renderSolution(tblArray, currentNode);
+      renderSolution(tblArray, currentNode, nodesVisited);
       clearInterval(timerId);
       endFound = true;
     }
@@ -113,7 +110,9 @@ const aStarSolve = function() {
   return undefined;
 };
 
-const renderSolution = function(tblArray, square) {
+const renderSolution = function(tblArray, square, nodesVisited) {
+  let efficiency;
+  let totalNodes = tblArray.length * tblArray[0].length;
   let solution = [];
 
   while (square.parent) {
@@ -131,6 +130,9 @@ const renderSolution = function(tblArray, square) {
     tblArray[cell.row][cell.col].removeClass('mid');
     tblArray[cell.row][cell.col].addClass('v');
   });
+
+  efficiency = ((totalNodes - (nodesVisited - solution.length)) / totalNodes) * 100;
+  $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
 
   $("table#maze tr").each(function() {
     let dataCell = $(this).find('td');

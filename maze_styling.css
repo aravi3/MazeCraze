@@ -202,6 +202,21 @@ td.head {
   font-size: 20px;
 }
 
+.instructions-efficiency {
+  font-size: 19px;
+}
+
+.instructions-numerator {
+  font-size: 18px;
+  border-bottom: 1px solid black;
+  display: inline;
+  padding-bottom: 8px;
+}
+
+.instructions-denominator {
+  font-size: 18px;
+}
+
 .instructions-link {
   font-family: 'Open Sans';
   font-size: 16px;
@@ -235,4 +250,8 @@ td.head {
 
 .linkedin-logo:hover {
   cursor: pointer;
+}
+
+.modal-button {
+  margin-bottom: 40px;
 }
