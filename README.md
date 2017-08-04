@@ -7,6 +7,8 @@
 MazeCraze is an algorithm visualization tool for solving mazes. It uses different
 tree traversal methods to present the visualization of the solution.
 
+![MainPic](./images/main_screen.png)
+
 ## Features & Implementation
 
 ### Different Tree Traversal Solutions
