@@ -292,6 +292,9 @@ $(() => {
     if (($('#start').length + $('#end').length) === 2) {
       Object(__WEBPACK_IMPORTED_MODULE_2__scripts_breadth_first__["a" /* default */])();
     }
+    else if (($('#start').length + $('#end').length) === 1) {
+      alert("Must select endpoint");
+    }
     else {
       let tblArray = Object(__WEBPACK_IMPORTED_MODULE_1__scripts_modules__["c" /* convertToArray */])();
       tblArray[0][0].attr('id', 'start');
@@ -317,6 +320,9 @@ $(() => {
     if (($('#start').length + $('#end').length) === 2) {
       Object(__WEBPACK_IMPORTED_MODULE_4__scripts_a_star__["a" /* default */])();
     }
+    else if (($('#start').length + $('#end').length) === 1) {
+      alert("Must select endpoint");
+    }
     else {
       let tblArray = Object(__WEBPACK_IMPORTED_MODULE_1__scripts_modules__["c" /* convertToArray */])();
       tblArray[0][0].attr('id', 'start');
@@ -341,6 +347,9 @@ $(() => {
 
     if (($('#start').length + $('#end').length) === 2) {
       Object(__WEBPACK_IMPORTED_MODULE_3__scripts_depth_first__["a" /* default */])();
+    }
+    else if (($('#start').length + $('#end').length) === 1) {
+      alert("Must select endpoint");
     }
     else {
       let tblArray = Object(__WEBPACK_IMPORTED_MODULE_1__scripts_modules__["c" /* convertToArray */])();

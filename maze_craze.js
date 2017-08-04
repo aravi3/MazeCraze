@@ -58,6 +58,9 @@ $(() => {
     if (($('#start').length + $('#end').length) === 2) {
       breadthFirstSolve();
     }
+    else if (($('#start').length + $('#end').length) === 1) {
+      alert("Must select endpoint");
+    }
     else {
       let tblArray = convertToArray();
       tblArray[0][0].attr('id', 'start');
@@ -83,6 +86,9 @@ $(() => {
     if (($('#start').length + $('#end').length) === 2) {
       aStarSolve();
     }
+    else if (($('#start').length + $('#end').length) === 1) {
+      alert("Must select endpoint");
+    }
     else {
       let tblArray = convertToArray();
       tblArray[0][0].attr('id', 'start');
@@ -107,6 +113,9 @@ $(() => {
 
     if (($('#start').length + $('#end').length) === 2) {
       depthFirstSolve();
+    }
+    else if (($('#start').length + $('#end').length) === 1) {
+      alert("Must select endpoint");
     }
     else {
       let tblArray = convertToArray();

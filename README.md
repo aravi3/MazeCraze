@@ -2,7 +2,7 @@
 
 [MazeCraze live][GitHubPages]
 
-[GitHubPages]: https://aravi3.github.io/GitHub-Pages/
+[GitHubPages]: https://aravi3.github.io/MazeCraze/
 
 MazeCraze is an algorithm visualization tool for solving mazes. It uses different
 tree traversal methods to present the visualization.
