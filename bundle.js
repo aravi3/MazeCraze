@@ -458,6 +458,12 @@ function irand(x) {
 const makeMaze = function(rows, cols) {
 	let w = parseInt(cols || 20);
 	let h = parseInt(rows || 20);
+
+	if (w > 50 || h > 50) {
+		alert("Dimensions must be under 50 x 50 for performance reasons!");
+		return;
+	}
+
 	let tbl = gid('maze');
 
 	tbl.innerHTML = '';
