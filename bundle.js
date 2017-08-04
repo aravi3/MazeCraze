@@ -289,6 +289,7 @@ $(() => {
           dataCell.each(function() {
             $(this).removeClass('mid');
             $(this).removeClass('v');
+            $(this).removeClass('head');
           });
       }
     });
@@ -321,6 +322,7 @@ $(() => {
           dataCell.each(function() {
             $(this).removeClass('mid');
             $(this).removeClass('v');
+            $(this).removeClass('head');
           });
       }
     });
@@ -353,6 +355,7 @@ $(() => {
           dataCell.each(function() {
             $(this).removeClass('mid');
             $(this).removeClass('v');
+            $(this).removeClass('head');
           });
       }
     });
@@ -388,6 +391,7 @@ $(() => {
           dataCell.each(function() {
             $(this).removeClass('mid');
             $(this).removeClass('v');
+            $(this).removeClass('head');
           });
       }
     });
@@ -535,7 +539,7 @@ const breadthFirstSolve = function() {
   let totalNodes = tblArray.length * tblArray[0].length;
   let timerId;
   let duration, t1, t0;
-  let neighborRow, neighborCol;
+  let neighborRow, neighborCol, interimRow, interimCol;
   let topNode, neighbors, up, right, down, left;
   let nodesVisited, efficiency;
   let nodeQueue = [];
@@ -571,7 +575,14 @@ const breadthFirstSolve = function() {
         nodeQueue.push(new __WEBPACK_IMPORTED_MODULE_0__breadth_first_node__["a" /* default */](neighbors[i], topNode));
         trail.push(new __WEBPACK_IMPORTED_MODULE_0__breadth_first_node__["a" /* default */](neighbors[i], topNode));
 
-        tblArray[neighborRow][neighborCol].addClass('mid');
+        tblArray[neighborRow][neighborCol].addClass('head');
+
+        for (let j = 0; j < (visitedNodes.length - 1); j++) {
+          interimRow = visitedNodes[j][0];
+          interimCol = visitedNodes[j][1];
+          tblArray[interimRow][interimCol].removeClass('head');
+          tblArray[interimRow][interimCol].addClass('mid');
+        }
 
         if (Object(__WEBPACK_IMPORTED_MODULE_1__modules__["a" /* arraysEqual */])(neighbors[i], Object(__WEBPACK_IMPORTED_MODULE_1__modules__["e" /* endPos */])())) {
           t1 = performance.now();
@@ -607,8 +618,19 @@ const renderSolution = function(tblArray, trail) {
   }
 
   solution.forEach(cell => {
+    tblArray[cell.row][cell.col].removeClass('head');
     tblArray[cell.row][cell.col].removeClass('mid');
     tblArray[cell.row][cell.col].addClass('v');
+  });
+
+  $("table#maze tr").each(function() {
+    let dataCell = $(this).find('td');
+
+    if (dataCell.length > 0) {
+        dataCell.each(function() {
+          $(this).removeClass('head');
+        });
+    }
   });
 };
 
@@ -676,8 +698,6 @@ const depthFirstSolve = function(node, visitedNodes = []) {
 
     visitedNodes.push(neighbors[i]);
 
-    // tblArray[neighborRow][neighborCol].addClass('mid');
-
     result = depthFirstSolve(neighbors[i], visitedNodes);
 
     if (result) {
@@ -701,17 +721,25 @@ const renderSolution = function() {
 
   let finishedMarkingVisited = false;
   let timerId;
-  let neighborRow, neighborCol;
+  let neighborRow, neighborCol, interimRow, interimCol;
   let i = 0;
 
   timerId = setInterval(() => {
     neighborRow = square.nodesVisited[i].pos[0];
     neighborCol = square.nodesVisited[i].pos[1];
-    tblArray[neighborRow][neighborCol].addClass('mid');
+
+    tblArray[neighborRow][neighborCol].addClass('head');
+
+    for (let j = 0; j < i; j++) {
+      interimRow = square.nodesVisited[j].pos[0];
+      interimCol = square.nodesVisited[j].pos[1];
+      tblArray[interimRow][interimCol].removeClass('head');
+      tblArray[interimRow][interimCol].addClass('mid');
+    }
 
     i++;
 
-    if (i === square.nodesVisited.length) {
+    if (i === nodesVisited) {
       finishedMarkingVisited = true;
     }
 
@@ -733,11 +761,22 @@ const renderSolution = function() {
       }
 
       solution.forEach(cell => {
+        tblArray[cell.row][cell.col].removeClass('head');
         tblArray[cell.row][cell.col].removeClass('mid');
         tblArray[cell.row][cell.col].addClass('v');
       });
 
       clearInterval(timerId);
+
+      $("table#maze tr").each(function() {
+        let dataCell = $(this).find('td');
+
+        if (dataCell.length > 0) {
+            dataCell.each(function() {
+              $(this).removeClass('head');
+            });
+        }
+      });
     }
   });
 };
@@ -778,7 +817,7 @@ const aStarSolve = function() {
   let totalNodes = tblArray.length * tblArray[0].length;
   let timerId;
   let duration, t1, t0;
-  let neighbors, neighborRow, neighborCol;
+  let neighbors, neighborRow, neighborCol, interimRow, interimCol;
   let up, right, down, left;
   let nodesVisited, efficiency;
   let gScore, gScoreIsBest;
@@ -819,6 +858,8 @@ const aStarSolve = function() {
     Object(__WEBPACK_IMPORTED_MODULE_1__modules__["j" /* removeNode */])(currentNode, openList);
 
     closedList.push(currentNode);
+    tblArray[currentNode.pos[0]][currentNode.pos[1]].removeClass('head');
+    tblArray[currentNode.pos[0]][currentNode.pos[1]].addClass('mid');
 
     neighbors = [];
     up = new __WEBPACK_IMPORTED_MODULE_0__a_star_node__["a" /* default */](Object(__WEBPACK_IMPORTED_MODULE_1__modules__["m" /* upPos */])(currentNode.pos), currentNode, Object(__WEBPACK_IMPORTED_MODULE_1__modules__["b" /* calculateHValue */])(Object(__WEBPACK_IMPORTED_MODULE_1__modules__["m" /* upPos */])(currentNode.pos)));
@@ -841,7 +882,14 @@ const aStarSolve = function() {
       }
 
       if (!endFound) {
-        tblArray[neighborRow][neighborCol].addClass('mid');
+        tblArray[neighborRow][neighborCol].addClass('head');
+
+        // for (let j = 0; j < closedList.length; j++) {
+        //   interimRow = closedList[j].pos[0];
+        //   interimCol = closedList[j].pos[1];
+        //   tblArray[interimRow][interimCol].removeClass('head');
+        //   tblArray[interimRow][interimCol].addClass('mid');
+        // }
       }
 
       gScore = currentNode.gValue + 1;
@@ -884,8 +932,19 @@ const renderSolution = function(tblArray, square) {
   }
 
   solution.forEach(cell => {
+    tblArray[cell.row][cell.col].removeClass('head');
     tblArray[cell.row][cell.col].removeClass('mid');
     tblArray[cell.row][cell.col].addClass('v');
+  });
+
+  $("table#maze tr").each(function() {
+    let dataCell = $(this).find('td');
+
+    if (dataCell.length > 0) {
+        dataCell.each(function() {
+          $(this).removeClass('head');
+        });
+    }
   });
 };
 

@@ -17,7 +17,7 @@ const breadthFirstSolve = function() {
   let totalNodes = tblArray.length * tblArray[0].length;
   let timerId;
   let duration, t1, t0;
-  let neighborRow, neighborCol;
+  let neighborRow, neighborCol, interimRow, interimCol;
   let topNode, neighbors, up, right, down, left;
   let nodesVisited, efficiency;
   let nodeQueue = [];
@@ -53,7 +53,14 @@ const breadthFirstSolve = function() {
         nodeQueue.push(new TreeNode(neighbors[i], topNode));
         trail.push(new TreeNode(neighbors[i], topNode));
 
-        tblArray[neighborRow][neighborCol].addClass('mid');
+        tblArray[neighborRow][neighborCol].addClass('head');
+
+        for (let j = 0; j < (visitedNodes.length - 1); j++) {
+          interimRow = visitedNodes[j][0];
+          interimCol = visitedNodes[j][1];
+          tblArray[interimRow][interimCol].removeClass('head');
+          tblArray[interimRow][interimCol].addClass('mid');
+        }
 
         if (arraysEqual(neighbors[i], endPos())) {
           t1 = performance.now();
@@ -89,8 +96,19 @@ const renderSolution = function(tblArray, trail) {
   }
 
   solution.forEach(cell => {
+    tblArray[cell.row][cell.col].removeClass('head');
     tblArray[cell.row][cell.col].removeClass('mid');
     tblArray[cell.row][cell.col].addClass('v');
+  });
+
+  $("table#maze tr").each(function() {
+    let dataCell = $(this).find('td');
+
+    if (dataCell.length > 0) {
+        dataCell.each(function() {
+          $(this).removeClass('head');
+        });
+    }
   });
 };
 

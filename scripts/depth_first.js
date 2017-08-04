@@ -47,8 +47,6 @@ const depthFirstSolve = function(node, visitedNodes = []) {
 
     visitedNodes.push(neighbors[i]);
 
-    // tblArray[neighborRow][neighborCol].addClass('mid');
-
     result = depthFirstSolve(neighbors[i], visitedNodes);
 
     if (result) {
@@ -72,17 +70,25 @@ const renderSolution = function() {
 
   let finishedMarkingVisited = false;
   let timerId;
-  let neighborRow, neighborCol;
+  let neighborRow, neighborCol, interimRow, interimCol;
   let i = 0;
 
   timerId = setInterval(() => {
     neighborRow = square.nodesVisited[i].pos[0];
     neighborCol = square.nodesVisited[i].pos[1];
-    tblArray[neighborRow][neighborCol].addClass('mid');
+
+    tblArray[neighborRow][neighborCol].addClass('head');
+
+    for (let j = 0; j < i; j++) {
+      interimRow = square.nodesVisited[j].pos[0];
+      interimCol = square.nodesVisited[j].pos[1];
+      tblArray[interimRow][interimCol].removeClass('head');
+      tblArray[interimRow][interimCol].addClass('mid');
+    }
 
     i++;
 
-    if (i === square.nodesVisited.length) {
+    if (i === nodesVisited) {
       finishedMarkingVisited = true;
     }
 
@@ -104,11 +110,22 @@ const renderSolution = function() {
       }
 
       solution.forEach(cell => {
+        tblArray[cell.row][cell.col].removeClass('head');
         tblArray[cell.row][cell.col].removeClass('mid');
         tblArray[cell.row][cell.col].addClass('v');
       });
 
       clearInterval(timerId);
+
+      $("table#maze tr").each(function() {
+        let dataCell = $(this).find('td');
+
+        if (dataCell.length > 0) {
+            dataCell.each(function() {
+              $(this).removeClass('head');
+            });
+        }
+      });
     }
   });
 };

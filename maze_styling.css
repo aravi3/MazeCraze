@@ -92,6 +92,10 @@ td.mid {
   /*transition: background-color linear 1s;*/
 }
 
+td.head {
+  background-color: black;
+}
+
 #start {
   background-color: #4ab229;
 }

@@ -20,7 +20,7 @@ const aStarSolve = function() {
   let totalNodes = tblArray.length * tblArray[0].length;
   let timerId;
   let duration, t1, t0;
-  let neighbors, neighborRow, neighborCol;
+  let neighbors, neighborRow, neighborCol, interimRow, interimCol;
   let up, right, down, left;
   let nodesVisited, efficiency;
   let gScore, gScoreIsBest;
@@ -61,6 +61,8 @@ const aStarSolve = function() {
     removeNode(currentNode, openList);
 
     closedList.push(currentNode);
+    tblArray[currentNode.pos[0]][currentNode.pos[1]].removeClass('head');
+    tblArray[currentNode.pos[0]][currentNode.pos[1]].addClass('mid');
 
     neighbors = [];
     up = new TreeNode(upPos(currentNode.pos), currentNode, calculateHValue(upPos(currentNode.pos)));
@@ -83,7 +85,14 @@ const aStarSolve = function() {
       }
 
       if (!endFound) {
-        tblArray[neighborRow][neighborCol].addClass('mid');
+        tblArray[neighborRow][neighborCol].addClass('head');
+
+        // for (let j = 0; j < closedList.length; j++) {
+        //   interimRow = closedList[j].pos[0];
+        //   interimCol = closedList[j].pos[1];
+        //   tblArray[interimRow][interimCol].removeClass('head');
+        //   tblArray[interimRow][interimCol].addClass('mid');
+        // }
       }
 
       gScore = currentNode.gValue + 1;
@@ -126,8 +135,19 @@ const renderSolution = function(tblArray, square) {
   }
 
   solution.forEach(cell => {
+    tblArray[cell.row][cell.col].removeClass('head');
     tblArray[cell.row][cell.col].removeClass('mid');
     tblArray[cell.row][cell.col].addClass('v');
+  });
+
+  $("table#maze tr").each(function() {
+    let dataCell = $(this).find('td');
+
+    if (dataCell.length > 0) {
+        dataCell.each(function() {
+          $(this).removeClass('head');
+        });
+    }
   });
 };
 

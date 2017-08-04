@@ -55,6 +55,7 @@ $(() => {
           dataCell.each(function() {
             $(this).removeClass('mid');
             $(this).removeClass('v');
+            $(this).removeClass('head');
           });
       }
     });
@@ -87,6 +88,7 @@ $(() => {
           dataCell.each(function() {
             $(this).removeClass('mid');
             $(this).removeClass('v');
+            $(this).removeClass('head');
           });
       }
     });
@@ -119,6 +121,7 @@ $(() => {
           dataCell.each(function() {
             $(this).removeClass('mid');
             $(this).removeClass('v');
+            $(this).removeClass('head');
           });
       }
     });
@@ -154,6 +157,7 @@ $(() => {
           dataCell.each(function() {
             $(this).removeClass('mid');
             $(this).removeClass('v');
+            $(this).removeClass('head');
           });
       }
     });
