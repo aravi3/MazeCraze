@@ -24,7 +24,6 @@ const aStarSolve = function() {
   let up, right, down, left;
   let nodesVisited, efficiency;
   let gScore, gScoreIsBest;
-  // let gValue = 10;
   let endFound = false;
   let currentNode;
   let openList = [];
@@ -86,13 +85,6 @@ const aStarSolve = function() {
 
       if (!endFound) {
         tblArray[neighborRow][neighborCol].addClass('head');
-
-        // for (let j = 0; j < closedList.length; j++) {
-        //   interimRow = closedList[j].pos[0];
-        //   interimCol = closedList[j].pos[1];
-        //   tblArray[interimRow][interimCol].removeClass('head');
-        //   tblArray[interimRow][interimCol].addClass('mid');
-        // }
       }
 
       gScore = currentNode.gValue + 1;

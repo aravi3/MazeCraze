@@ -5,8 +5,6 @@ import depthFirstSolve from './scripts/depth_first';
 import aStarSolve from './scripts/a_star';
 
 $(() => {
-  window.scrollTo(0, 0);
-
   $('.modal-button').on('click', (e) => {
     e.preventDefault();
     $('#splash').css('visibility', 'hidden');
