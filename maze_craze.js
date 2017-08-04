@@ -5,6 +5,9 @@ import depthFirstSolve from './scripts/depth_first';
 import aStarSolve from './scripts/a_star';
 
 $(() => {
+  $('#rows').val('20');
+  $('#cols').val('20');
+
   $('.modal-button').on('click', (e) => {
     e.preventDefault();
     $('#splash').css('visibility', 'hidden');
