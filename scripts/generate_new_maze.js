@@ -41,11 +41,11 @@ function irand(x) {
 }
 
 export const makeMaze = function(rows, cols) {
-	if (parseInt(rows) < 0 || parseInt(cols) < 0) {
+	if (parseInt(rows) <= 0 || parseInt(cols) <= 0) {
 		alert("Dimensions must be positive numbers!");
 		return;
 	}
-	
+
 	let w = parseInt(cols || 20);
 	let h = parseInt(rows || 20);
 
