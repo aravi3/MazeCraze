@@ -82,6 +82,9 @@ The user may enter in the numbers of rows and columns for the maze. If no values
 are entered, then the default 20 x 20 maze is randomly generated. The depth-first
 search algorithm is used to render the maze.
 
+I followed the code tutorial on how to generate a random maze using depth-first search
+from https://rosettacode.org/wiki/Maze_generation
+
 ## Future Directions for the Project
 
 The following 2 features are next steps

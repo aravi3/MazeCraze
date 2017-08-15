@@ -1,119 +1,112 @@
-Node.prototype.add = function(tag, cnt, txt) {
-	for (let i = 0; i < cnt; i++) {
-    this.appendChild(ce(tag, txt));
+// Followed code tutorial on how to generate a random maze using depth-first search
+// from https://rosettacode.org/wiki/Maze_generation
+
+const DIRS = ['s', 'e', 'w', 'n'];
+
+NodeList.prototype.map = function(node) {
+	for (let i = 0; i < this.length; i++) {
+    node(this[i]);
   }
 };
 
-Node.prototype.ins = function(tag) {
-	this.insertBefore(ce(tag), this.firstChild);
+Node.prototype.insert = function(el) {
+	this.insertBefore(createElement(el), this.firstChild);
 };
 
-Node.prototype.kid = function(i) {
+Node.prototype.add = function(el, count, text) {
+	for (let i = 0; i < count; i++) {
+    this.appendChild(createElement(el, text));
+  }
+};
+
+Node.prototype.child = function(i) {
   return this.childNodes[i];
 };
 
-Node.prototype.cls = function(t) {
-  this.className += ' ' + t;
-};
+const createElement = (tag, text) => {
+	let el = document.createElement(tag);
 
-NodeList.prototype.map = function(g) {
-	for (let i = 0; i < this.length; i++) {
-    g(this[i]);
-  }
-};
-
-function ce(tag, txt) {
-	let x = document.createElement(tag);
-
-	if (txt !== undefined) {
-    x.innerHTML = txt;
+	if (text !== undefined) {
+    el.innerHTML = text;
   }
 
-	return x;
-}
-
-export const gid = function(e) {
-  return document.getElementById(e);
+	return el;
 };
 
-function irand(x) {
-  return Math.floor(Math.random() * x);
-}
+const shuffle = (arr) => {
+	for (let i = 3; i > 0; i--) {
+		let rand = Math.floor(Math.random() * (i + 1));
 
-export const makeMaze = function(rows, cols) {
+		if (i === rand) {
+      continue;
+    }
+
+		let temp = arr[rand];
+    arr[rand] = arr[i];
+    arr[i] = temp;
+	}
+
+	return arr;
+};
+
+const walk = (node) => {
+	node.innerHTML = '&nbsp;';
+	let idx = shuffle([0, 1, 2, 3]);
+
+	for (let j = 0; j < 4; j++) {
+		let i = idx[j];
+		let neighbor = node.neighbors[i];
+
+		if (neighbor.textContent !== '*') {
+      continue;
+    }
+
+		node.className += ' ' + DIRS[i];
+		neighbor.className += ' ' + DIRS[3 - i];
+		walk(neighbor);
+	}
+};
+
+export const makeMaze = (rows, cols) => {
 	if (parseInt(rows) <= 0 || parseInt(cols) <= 0) {
 		alert("Dimensions must be positive numbers!");
 		return;
 	}
 
-	let w = parseInt(cols || 20);
-	let h = parseInt(rows || 20);
+	let width = parseInt(cols || 20);
+	let height = parseInt(rows || 20);
 
-	if (w > 50 || h > 50) {
+	if (width > 50 || height > 50) {
 		alert("Dimensions must be under 50 x 50 for performance reasons!");
 		return;
 	}
 
-	let tbl = gid('maze');
+	let tbl = document.getElementById('maze');
 
-	tbl.innerHTML = '';
-	tbl.add('tr', h);
+	tbl.innerHTML = "";
+	tbl.add('tr', height);
 
-	tbl.childNodes.map(x => {
-    x.add('th', 1);
-    x.add('td', w, '*');
-    x.add('th', 1);
+	tbl.childNodes.map(node => {
+    node.add('th', 1);
+    node.add('td', width, '*');
+    node.add('th', 1);
   });
 
-	tbl.ins('tr');
+	tbl.insert('tr');
 	tbl.add('tr', 1);
-	tbl.firstChild.add('th', w + 2);
-	tbl.lastChild.add('th', w + 2);
+	tbl.firstChild.add('th', width + 2);
+	tbl.lastChild.add('th', width + 2);
 
-	for (let i = 1; i <= h; i++) {
-		for (let j = 1; j <= w; j++) {
-			tbl.kid(i).kid(j).neighbors = [
-				tbl.kid(i + 1).kid(j),
-				tbl.kid(i).kid(j + 1),
-				tbl.kid(i).kid(j - 1),
-				tbl.kid(i - 1).kid(j)
+	for (let i = 1; i <= height; i++) {
+		for (let j = 1; j <= width; j++) {
+			tbl.child(i).child(j).neighbors = [
+				tbl.child(i + 1).child(j),
+				tbl.child(i).child(j + 1),
+				tbl.child(i).child(j - 1),
+				tbl.child(i - 1).child(j)
 			];
 		}
 	}
 
-	walk(tbl.kid(irand(h) + 1).kid(irand(w) + 1));
+	walk(tbl.child(Math.floor(Math.random() * height) + 1).child(Math.floor(Math.random() * width) + 1));
 };
-
-function shuffle(x) {
-	for (let i = 3; i > 0; i--) {
-		let j = irand(i + 1);
-
-		if (j == i) {
-      continue;
-    }
-
-		let t = x[j];
-    x[j] = x[i];
-    x[i] = t;
-	}
-
-	return x;
-}
-
-let dirs = ['s', 'e', 'w', 'n'];
-
-function walk(c) {
-	c.innerHTML = '&nbsp;';
-	let idx = shuffle([0, 1, 2, 3]);
-	for (let j = 0; j < 4; j++) {
-		let i = idx[j];
-		let x = c.neighbors[i];
-
-		if (x.textContent != '*') {
-      continue;
-    }
-
-		c.cls(dirs[i]), x.cls(dirs[3 - i]);
-		walk(x);
-	}
-}
