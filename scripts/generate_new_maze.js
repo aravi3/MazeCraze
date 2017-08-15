@@ -9,28 +9,18 @@ NodeList.prototype.map = function(node) {
   }
 };
 
-Node.prototype.insert = function(el) {
-	this.insertBefore(createElement(el), this.firstChild);
-};
+Node.prototype.add = function(tag, count, text) {
+	let el;
 
-Node.prototype.add = function(el, count, text) {
 	for (let i = 0; i < count; i++) {
-    this.appendChild(createElement(el, text));
+		el = document.createElement(tag);
+
+		if (text !== undefined) {
+			el.innerHTML = text;
+		}
+
+    this.appendChild(el);
   }
-};
-
-Node.prototype.child = function(i) {
-  return this.childNodes[i];
-};
-
-const createElement = (tag, text) => {
-	let el = document.createElement(tag);
-
-	if (text !== undefined) {
-    el.innerHTML = text;
-  }
-
-	return el;
 };
 
 const shuffle = (arr) => {
@@ -92,21 +82,23 @@ export const makeMaze = (rows, cols) => {
     node.add('th', 1);
   });
 
-	tbl.insert('tr');
+	let firstRow = document.createElement('tr');
+
+	tbl.insertBefore(firstRow, tbl.firstChild);
 	tbl.add('tr', 1);
 	tbl.firstChild.add('th', width + 2);
 	tbl.lastChild.add('th', width + 2);
 
 	for (let i = 1; i <= height; i++) {
 		for (let j = 1; j <= width; j++) {
-			tbl.child(i).child(j).neighbors = [
-				tbl.child(i + 1).child(j),
-				tbl.child(i).child(j + 1),
-				tbl.child(i).child(j - 1),
-				tbl.child(i - 1).child(j)
+			tbl.childNodes[i].childNodes[j].neighbors = [
+				tbl.childNodes[i + 1].childNodes[j],
+				tbl.childNodes[i].childNodes[j + 1],
+				tbl.childNodes[i].childNodes[j - 1],
+				tbl.childNodes[i - 1].childNodes[j]
 			];
 		}
 	}
 
-	walk(tbl.child(Math.floor(Math.random() * height) + 1).child(Math.floor(Math.random() * width) + 1));
+	walk(tbl.childNodes[Math.floor(Math.random() * height) + 1].childNodes[Math.floor(Math.random() * width) + 1]);
 };

@@ -98,7 +98,7 @@ const renderSolution = function(tblArray, trail, nodesVisited) {
   solution.forEach(cell => {
     tblArray[cell.row][cell.col].removeClass('head');
     tblArray[cell.row][cell.col].removeClass('mid');
-    tblArray[cell.row][cell.col].addClass('v');
+    tblArray[cell.row][cell.col].addClass('solution');
   });
 
   efficiency = ((totalNodes - (nodesVisited - solution.length)) / totalNodes) * 100;

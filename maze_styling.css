@@ -4,7 +4,7 @@ body {
 
 h1 {
   font-family: 'Oswald';
-  font-size: 30px;
+  font-size: 35px;
 }
 
 h2 {
@@ -82,7 +82,7 @@ td.e {
   border-right: none;
 }
 
-td.v {
+td.solution {
   background-color: #2636FF;
 }
 
@@ -175,7 +175,7 @@ td.head {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(250, 250, 250, 0.9);
+  background-color: rgba(250, 250, 250, 0.97);
   color: black;
   z-index: 999;
 }

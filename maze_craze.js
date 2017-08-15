@@ -55,7 +55,7 @@ $(() => {
       if (dataCell.length > 0) {
           dataCell.each(function() {
             $(this).removeClass('mid');
-            $(this).removeClass('v');
+            $(this).removeClass('solution');
             $(this).removeClass('head');
           });
       }
@@ -88,7 +88,7 @@ $(() => {
       if (dataCell.length > 0) {
           dataCell.each(function() {
             $(this).removeClass('mid');
-            $(this).removeClass('v');
+            $(this).removeClass('solution');
             $(this).removeClass('head');
           });
       }
@@ -121,7 +121,7 @@ $(() => {
       if (dataCell.length > 0) {
           dataCell.each(function() {
             $(this).removeClass('mid');
-            $(this).removeClass('v');
+            $(this).removeClass('solution');
             $(this).removeClass('head');
           });
       }
@@ -157,7 +157,7 @@ $(() => {
       if (dataCell.length > 0) {
           dataCell.each(function() {
             $(this).removeClass('mid');
-            $(this).removeClass('v');
+            $(this).removeClass('solution');
             $(this).removeClass('head');
           });
       }
