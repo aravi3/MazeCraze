@@ -476,8 +476,8 @@ const makeMaze = (rows, cols) => {
 		return;
 	}
 
-	let width = parseInt(cols || 20);
-	let height = parseInt(rows || 20);
+	let width = parseInt(cols) || 20;
+	let height = parseInt(rows) || 20;
 
 	if (width > 50 || height > 50) {
 		alert("Dimensions must be under 50 x 50 for performance reasons!");
@@ -495,9 +495,9 @@ const makeMaze = (rows, cols) => {
     node.add('th', 1);
   });
 
-	let firstRow = document.createElement('tr');
+	let el = document.createElement('tr');
 
-	tbl.insertBefore(firstRow, tbl.firstChild);
+	tbl.insertBefore(el, tbl.firstChild);
 	tbl.add('tr', 1);
 	tbl.firstChild.add('th', width + 2);
 	tbl.lastChild.add('th', width + 2);
