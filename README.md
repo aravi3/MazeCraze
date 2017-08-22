@@ -4,8 +4,9 @@
 
 [GitHubPages]: https://aravi3.github.io/MazeCraze/
 
-MazeCraze is an algorithm visualization tool for solving mazes. It uses different
-tree traversal methods to present the visualization of the solution.
+MazeCraze is an algorithm visualization tool for solving mazes. It uses 3 different
+tree traversal methods to present the visualization of the solution: breadth-first search,
+depth-first search, and A*.
 
 ![MainPic](./images/main_screen.png)
 
@@ -61,7 +62,7 @@ class breadthFirstNode {
 
 ### Efficiency Calculations
 
-I calculate efficiency calculations for each algorithm. These calculations include
+I calculate efficiency stats for each algorithm. These calculations include
 execution time, nodes visited, and efficiency. In this application, I define
 efficiency as `((totalNodes - nodesVisited) / totalNodes) * 100`. As an example
 below, you can see that I perform these calculations once the ending point is found.
