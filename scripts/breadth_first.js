@@ -65,7 +65,6 @@ const breadthFirstSolve = function() {
           t1 = performance.now();
           duration = (t1 - t0)/1000;
           nodesVisited = visitedNodes.length;
-          // efficiency = ((totalNodes - nodesVisited) / totalNodes) * 100;
           $('.time-value').text(`${duration.toFixed(2)} s`);
           $('.visited-value').text(nodesVisited);
           renderSolution(tblArray, trail, nodesVisited);
