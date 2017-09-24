@@ -15,7 +15,6 @@ import {
 
 const depthFirstSolve = function(node, visitedNodes = []) {
   let tblArray = convertToArray();
-  let timerId;
   let neighbors, up, right, down, left;
   let neighborRow, neighborCol;
   let result;
