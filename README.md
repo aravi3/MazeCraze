@@ -94,7 +94,7 @@ for MazeCraze:
 ### Visual Representation of Efficiency Calculations
 
 I plan to use D3.js to graph the execution time, visited nodes, and efficiency
-for each tree traversal methods at different grid sizes.
+for each tree traversal method at different grid sizes.
 
 ### More Tree Traversal Solutions
 
