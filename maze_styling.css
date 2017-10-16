@@ -217,6 +217,7 @@ td.head {
 }
 
 .instructions-link {
+  display: inline-block;
   font-family: 'Open Sans';
   font-size: 16px;
 }
