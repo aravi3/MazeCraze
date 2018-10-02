@@ -100,7 +100,7 @@ const renderSolution = function(tblArray, trail, nodesVisited) {
     tblArray[cell.row][cell.col].addClass('solution');
   });
 
-  efficiency = ((totalNodes - nodesVisited) / totalNodes) * 100;
+  efficiency = ((totalNodes - nodesVisited) / (totalNodes - solution.length)) * 100;
 
   $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
 

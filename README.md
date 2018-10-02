@@ -64,16 +64,17 @@ class breadthFirstNode {
 
 I calculate efficiency stats for each algorithm. These calculations include
 execution time, nodes visited, and efficiency. In this application, I define
-efficiency as `((totalNodes - nodesVisited) / totalNodes) * 100`. As an example
-below, you can see that I perform these calculations once the ending point is found.
-`t0 = performance.now()` is executed right before the start of the algorithm:
+efficiency as `((totalNodes - nodesVisited) / (totalNodes - solution.length)) * 100`. 
+As an example below, you can see that I perform these calculations once the ending 
+point is found. `t0 = performance.now()` is executed right before the start of the 
+algorithm:
 
 ```js
 if (arraysEqual(neighbors[i], endPos())) {
   t1 = performance.now();
   duration = (t1 - t0) / 1000;
   nodesVisited = visitedNodes.length;
-  efficiency = ((totalNodes - nodesVisited) / totalNodes) * 100;
+  efficiency = ((totalNodes - nodesVisited) / (totalNodes - solution.length)) * 100;
 }
 ```
 
