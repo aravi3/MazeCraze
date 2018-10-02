@@ -113,7 +113,7 @@ const renderSolution = function() {
         tblArray[cell.row][cell.col].addClass('solution');
       });
 
-      efficiency = ((totalNodes - (nodesVisited - solution.length)) / totalNodes) * 100;
+      efficiency = ((totalNodes - nodesVisited) / totalNodes) * 100;
       $('.efficiency-value').text(`${efficiency.toFixed(2)} %`);
 
       clearInterval(timerId);
